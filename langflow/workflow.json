@@ -1,0 +1,40 @@
+{
+  "workflow_name": "NutriGuide - PS8 Nutrition Agent RAG Workflow",
+  "workflow_type": "component_manifest",
+  "manifest_version": "1.0",
+  "native_langflow_export": false,
+  "compatibility_note": "LangFlow native import/export JSON varies by release. This version-neutral manifest records the actual intended components and edges; build or map these nodes in your installed LangFlow version. It has not been validated as a native flow import.",
+  "components": [
+    {"id":"chat_input","type":"Chat Input","purpose":"Collect the user's text query and session context."},
+    {"id":"agent_router","type":"Custom Python Component","purpose":"Route a task to the Nutrition Knowledge, Diet Recommendation, Health Advisory, or Food Log and Feedback function."},
+    {"id":"file_foods","type":"File","purpose":"Load data/foods.csv, data/guidance.json, and data/meal_templates.json."},
+    {"id":"split_text","type":"Text Splitter","purpose":"Make retrievable food/guidance documents while preserving one food record as a useful chunk."},
+    {"id":"embeddings","type":"Embeddings","purpose":"Use IBM Slate in configured IBM mode or a local TF-IDF equivalent for offline demo."},
+    {"id":"faiss","type":"FAISS Vector Store","purpose":"Index document embeddings and metadata for similarity search."},
+    {"id":"retriever","type":"Retriever","purpose":"Retrieve top relevant food and guidance records and their source metadata."},
+    {"id":"safe_prompt","type":"Prompt Template","purpose":"Combine query, retrieved context, validated deterministic draft and safety instructions."},
+    {"id":"granite","type":"IBM watsonx.ai Model","purpose":"Optional generation with ibm/granite-3-3-8b-instruct after account access is confirmed."},
+    {"id":"chat_output","type":"Chat Output","purpose":"Display answer, source references, and explicit live/demo status."}
+  ],
+  "edges": [
+    {"from":"chat_input","to":"agent_router"},
+    {"from":"file_foods","to":"split_text"},
+    {"from":"split_text","to":"embeddings"},
+    {"from":"embeddings","to":"faiss"},
+    {"from":"faiss","to":"retriever"},
+    {"from":"agent_router","to":"retriever","label":"routed retrieval query"},
+    {"from":"agent_router","to":"safe_prompt","label":"safe draft and task instruction"},
+    {"from":"retriever","to":"safe_prompt","label":"verified context and sources"},
+    {"from":"safe_prompt","to":"granite"},
+    {"from":"granite","to":"chat_output"},
+    {"from":"retriever","to":"chat_output","label":"source metadata"}
+  ],
+  "safety_rules": [
+    "Filter every meal component for declared diet and allergens before model generation.",
+    "Use deterministic CSV calculations; model cannot change calculated values or add foods.",
+    "Return an explicit not-found response when relevant retrieved context is absent.",
+    "Never diagnose, prescribe, or claim professional medical suitability.",
+    "Label offline output as DEMO; do not imply IBM Granite was called."
+  ],
+  "runtime_note": "The Streamlit app executes its equivalent Python pipeline directly. It does not depend on or call a running LangFlow instance."
+}

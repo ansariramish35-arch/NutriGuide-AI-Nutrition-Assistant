@@ -1,0 +1,9 @@
+{
+  "name": "Sample",
+  "age": 21,
+  "dietary_preference": "Vegetarian (no eggs)",
+  "fitness_goal": "Improve general nutrition",
+  "allergies": ["Peanuts"],
+  "preferred_cuisine": "Indian",
+  "activity_level": "Lightly active"
+}

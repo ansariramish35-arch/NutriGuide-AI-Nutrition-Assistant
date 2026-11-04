@@ -1,0 +1,1 @@
+Supporting student documents: `viva_guide.md`, `demo_script.md`, and `testing_report.md`. They intentionally distinguish verified code behavior from external services and future scope.

@@ -1,0 +1,13 @@
+# Core app and local demonstration mode (Python 3.10–3.13)
+streamlit>=1.40,<2
+pandas>=2.1,<3
+plotly>=5.20,<7
+faiss-cpu>=1.8,<2
+scikit-learn>=1.4,<2
+python-dotenv>=1.0,<2
+ibm-watsonx-ai>=1.1,<2
+
+# Optional authoring utilities (not required to run the app)
+# matplotlib>=3.8,<4
+# python-pptx>=1.0,<2
+# pytest>=8,<10

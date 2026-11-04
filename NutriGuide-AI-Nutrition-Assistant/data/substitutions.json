@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fried_food",
+    "keywords": ["fried", "deep fried", "pakora", "samosa", "chips", "fries"],
+    "alternative": "Choose a baked or boiled potato with mixed vegetables instead of a deep-fried snack.",
+    "reason": "Changing the cooking method can reduce added oil. The prototype does not calculate a precise saving without a recipe.",
+    "food_ids": ["potato", "mixed_vegetables"],
+    "source_id": "who_sugar_salt"
+  },
+  {
+    "id": "sugary_drink",
+    "keywords": ["soda", "cola", "soft drink", "sugary drink", "sweetened juice"],
+    "alternative": "Choose water or another unsweetened drink instead of a sugar-sweetened beverage.",
+    "reason": "This is a practical way to reduce free-sugar intake.",
+    "food_ids": [],
+    "source_id": "who_sugar_salt"
+  },
+  {
+    "id": "white_rice",
+    "keywords": ["white rice"],
+    "alternative": "Try brown rice with lentils and vegetables, keeping the logged portion consistent.",
+    "reason": "In this dataset, cooked brown rice contains 1.6 g fibre per 100 g compared with 0.4 g per 100 g for the selected cooked white rice record.",
+    "food_ids": ["brown_rice", "lentils", "mixed_vegetables"],
+    "source_id": "who_balanced_diet"
+  },
+  {
+    "id": "refined_bread",
+    "keywords": ["white bread", "refined bread", "maida bread"],
+    "alternative": "Use whole-wheat bread where suitable and add a protein-containing food.",
+    "reason": "Whole grains are included in WHO's description of a healthy diet. Check gluten allergy before using this swap.",
+    "food_ids": ["whole_wheat_bread", "chickpeas"],
+    "source_id": "who_balanced_diet"
+  },
+  {
+    "id": "sweet_snack",
+    "keywords": ["candy", "chocolate", "sweet snack", "dessert", "mithai"],
+    "alternative": "For a simple snack, try a fruit such as a banana, apple or orange; portion and overall diet still matter.",
+    "reason": "Fruit is part of a varied healthy diet and can replace an occasional sweet snack.",
+    "food_ids": ["banana", "apple", "orange"],
+    "source_id": "who_fruit_vegetables"
+  }
+]

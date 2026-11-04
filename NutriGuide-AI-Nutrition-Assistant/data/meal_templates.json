@@ -1,0 +1,154 @@
+[
+  {
+    "id": "breakfast_oats_milk_banana",
+    "meal_types": ["breakfast"],
+    "cuisines": ["Indian", "International"],
+    "title": "Oats with low-fat milk and banana",
+    "components": [{"food_id": "oats", "servings": 1}, {"food_id": "milk", "servings": 1}, {"food_id": "banana", "servings": 1}],
+    "reason": "Oats provide fibre, while milk increases the protein content; banana adds a fruit portion."
+  },
+  {
+    "id": "breakfast_oats_almond_banana",
+    "meal_types": ["breakfast"],
+    "cuisines": ["Indian", "International"],
+    "title": "Oats with banana and almonds",
+    "components": [{"food_id": "oats", "servings": 1}, {"food_id": "banana", "servings": 1}, {"food_id": "almonds", "servings": 1}],
+    "reason": "This plant-based combination combines a whole grain, fruit and a small portion of nuts. Use water or a suitable fortified milk alternative for preparation; that extra ingredient is not included in the totals."
+  },
+  {
+    "id": "breakfast_tofu_bread_apple",
+    "meal_types": ["breakfast"],
+    "cuisines": ["International"],
+    "title": "Tofu with whole-wheat bread and apple",
+    "components": [{"food_id": "tofu", "servings": 1}, {"food_id": "whole_wheat_bread", "servings": 2}, {"food_id": "apple", "servings": 1}],
+    "reason": "Tofu is the main protein source; whole-wheat bread and apple make the meal more filling."
+  },
+  {
+    "id": "breakfast_chickpea_roti",
+    "meal_types": ["breakfast"],
+    "cuisines": ["Indian"],
+    "title": "Chickpeas with roti and cucumber",
+    "components": [{"food_id": "chickpeas", "servings": 1}, {"food_id": "roti", "servings": 1}, {"food_id": "cucumber", "servings": 1}],
+    "reason": "Chickpeas provide plant protein and fibre; cucumber adds a vegetable portion."
+  },
+  {
+    "id": "breakfast_chickpea_cucumber",
+    "meal_types": ["breakfast"],
+    "cuisines": ["Indian"],
+    "title": "Chickpea and cucumber breakfast bowl",
+    "components": [{"food_id": "chickpeas", "servings": 1}, {"food_id": "cucumber", "servings": 1}],
+    "reason": "This gluten-free, plant-based option uses chickpeas as its protein source."
+  },
+  {
+    "id": "breakfast_egg_bread_orange",
+    "meal_types": ["breakfast"],
+    "cuisines": ["Indian", "International"],
+    "title": "Eggs, whole-wheat bread and orange",
+    "components": [{"food_id": "egg", "servings": 1}, {"food_id": "whole_wheat_bread", "servings": 2}, {"food_id": "orange", "servings": 1}],
+    "reason": "Eggs and whole-wheat bread contribute protein, while orange adds fruit."
+  },
+  {
+    "id": "breakfast_cottage_bread_banana",
+    "meal_types": ["breakfast"],
+    "cuisines": ["Indian", "International"],
+    "title": "Cottage cheese, whole-wheat bread and banana",
+    "components": [{"food_id": "cottage_cheese", "servings": 1}, {"food_id": "whole_wheat_bread", "servings": 2}, {"food_id": "banana", "servings": 1}],
+    "reason": "Cottage cheese is a protein-rich option in the selected USDA record; bread and banana complete the meal."
+  },
+  {
+    "id": "meal_lentils_brown_rice_vegetables",
+    "meal_types": ["lunch", "dinner"],
+    "cuisines": ["Indian", "International"],
+    "title": "Dal, brown rice and mixed vegetables",
+    "components": [{"food_id": "lentils", "servings": 1}, {"food_id": "brown_rice", "servings": 1}, {"food_id": "mixed_vegetables", "servings": 1}, {"food_id": "spinach", "servings": 1}],
+    "reason": "Lentils supply plant protein and fibre, with grain and two vegetable components for variety."
+  },
+  {
+    "id": "meal_rajma_rice_cucumber",
+    "meal_types": ["lunch", "dinner"],
+    "cuisines": ["Indian"],
+    "title": "Rajma, rice and cucumber",
+    "components": [{"food_id": "kidney_beans", "servings": 1}, {"food_id": "white_rice", "servings": 1}, {"food_id": "cucumber", "servings": 1}],
+    "reason": "Kidney beans provide plant protein and fibre; cucumber adds a fresh vegetable portion."
+  },
+  {
+    "id": "meal_chickpea_roti_spinach",
+    "meal_types": ["lunch", "dinner"],
+    "cuisines": ["Indian"],
+    "title": "Chickpeas, two rotis and spinach",
+    "components": [{"food_id": "chickpeas", "servings": 1}, {"food_id": "roti", "servings": 2}, {"food_id": "spinach", "servings": 1}],
+    "reason": "Chickpeas and roti together provide protein and energy, while spinach adds a vegetable component."
+  },
+  {
+    "id": "meal_tofu_brown_rice_broccoli",
+    "meal_types": ["lunch", "dinner"],
+    "cuisines": ["International"],
+    "title": "Tofu, brown rice, broccoli and mixed vegetables",
+    "components": [{"food_id": "tofu", "servings": 1}, {"food_id": "brown_rice", "servings": 1}, {"food_id": "broccoli", "servings": 1}, {"food_id": "mixed_vegetables", "servings": 1}],
+    "reason": "Tofu raises protein content, and two vegetable records increase variety."
+  },
+  {
+    "id": "meal_chicken_rice_vegetables",
+    "meal_types": ["lunch", "dinner"],
+    "cuisines": ["Indian", "International"],
+    "title": "Chicken breast, rice and vegetables",
+    "components": [{"food_id": "chicken", "servings": 1}, {"food_id": "white_rice", "servings": 1}, {"food_id": "mixed_vegetables", "servings": 1}, {"food_id": "spinach", "servings": 1}],
+    "reason": "Chicken breast is the main protein source; rice provides energy and vegetables add variety."
+  },
+  {
+    "id": "meal_salmon_sweet_potato_broccoli",
+    "meal_types": ["lunch", "dinner"],
+    "cuisines": ["International"],
+    "title": "Salmon, sweet potato and broccoli",
+    "components": [{"food_id": "salmon", "servings": 1}, {"food_id": "sweet_potato", "servings": 1}, {"food_id": "broccoli", "servings": 1}],
+    "reason": "Salmon supplies protein, with sweet potato for energy and broccoli as a vegetable."
+  },
+  {
+    "id": "meal_cottage_roti_vegetables",
+    "meal_types": ["lunch", "dinner"],
+    "cuisines": ["Indian"],
+    "title": "Cottage cheese, two rotis and vegetables",
+    "components": [{"food_id": "cottage_cheese", "servings": 1}, {"food_id": "roti", "servings": 2}, {"food_id": "mixed_vegetables", "servings": 1}, {"food_id": "spinach", "servings": 1}],
+    "reason": "Cottage cheese is the main protein source, balanced with grain and vegetables."
+  },
+  {
+    "id": "snack_yogurt_banana",
+    "meal_types": ["snack"],
+    "cuisines": ["Indian", "International"],
+    "title": "Plain yogurt and banana",
+    "components": [{"food_id": "yogurt", "servings": 1}, {"food_id": "banana", "servings": 1}],
+    "reason": "Yogurt contributes protein and banana provides a fruit portion."
+  },
+  {
+    "id": "snack_apple_almonds",
+    "meal_types": ["snack"],
+    "cuisines": ["Indian", "International"],
+    "title": "Apple and a small handful of almonds",
+    "components": [{"food_id": "apple", "servings": 1}, {"food_id": "almonds", "servings": 1}],
+    "reason": "This combines fruit with a measured nut portion; avoid it with a tree-nut allergy."
+  },
+  {
+    "id": "snack_chickpea_cucumber",
+    "meal_types": ["snack"],
+    "cuisines": ["Indian"],
+    "title": "Chickpea and cucumber bowl",
+    "components": [{"food_id": "chickpeas", "servings": 0.5}, {"food_id": "cucumber", "servings": 1}],
+    "reason": "A half serving of chickpeas offers plant protein and fibre in a snack-sized portion."
+  },
+  {
+    "id": "snack_sweet_potato",
+    "meal_types": ["snack"],
+    "cuisines": ["Indian", "International"],
+    "title": "Baked sweet potato",
+    "components": [{"food_id": "sweet_potato", "servings": 1}],
+    "reason": "A single measured serving keeps this snack simple and easy to log."
+  },
+  {
+    "id": "snack_cottage_cucumber",
+    "meal_types": ["snack"],
+    "cuisines": ["Indian", "International"],
+    "title": "Cottage cheese and cucumber",
+    "components": [{"food_id": "cottage_cheese", "servings": 0.5}, {"food_id": "cucumber", "servings": 1}],
+    "reason": "Cottage cheese provides protein in a smaller snack portion."
+  }
+]

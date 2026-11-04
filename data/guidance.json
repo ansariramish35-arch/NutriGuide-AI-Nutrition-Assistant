@@ -1,0 +1,50 @@
+[
+  {
+    "id": "who_balanced_diet",
+    "title": "Balanced diet and food variety",
+    "topic": "balanced meals",
+    "text": "WHO describes a healthy diet as including fruits, vegetables, legumes, nuts and whole grains. Choose a variety of foods and combine a grain or other energy food, a protein source, vegetables or fruit, and water. NutriGuide uses this as general education, not a medical prescription.",
+    "source_name": "World Health Organization — Healthy diet",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/healthy-diet"
+  },
+  {
+    "id": "who_fruit_vegetables",
+    "title": "Fruit and vegetable intake",
+    "topic": "balanced meals",
+    "text": "For adults, WHO recommends at least 400 g, or five portions, of fruit and vegetables per day. Potatoes, sweet potatoes, cassava and other starchy roots are not counted toward this particular recommendation.",
+    "source_name": "World Health Organization — Healthy diet",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/healthy-diet"
+  },
+  {
+    "id": "who_sugar_salt",
+    "title": "Free sugars and salt",
+    "topic": "healthy substitutions",
+    "text": "WHO recommends reducing free sugars to less than 10% of total energy intake, with a further reduction below 5% suggested for additional benefits. WHO also recommends keeping salt intake below 5 g per day for adults.",
+    "source_name": "World Health Organization — Healthy diet",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/healthy-diet"
+  },
+  {
+    "id": "hydration_general",
+    "title": "Hydration",
+    "topic": "hydration",
+    "text": "Drink water regularly and use thirst, weather and activity as practical cues. Water is a simple alternative to sugar-sweetened drinks. Individual fluid needs differ; people advised to restrict fluids should follow their clinician's guidance.",
+    "source_name": "WHO healthy-diet context; general educational guidance",
+    "source_url": "https://www.who.int/news-room/fact-sheets/detail/healthy-diet"
+  },
+  {
+    "id": "protein_general",
+    "title": "Protein-rich food choices",
+    "topic": "protein intake",
+    "text": "Include a protein-containing food across meals. Examples in this prototype include lentils, chickpeas, kidney beans, tofu, milk, yogurt, cottage cheese, eggs, chicken and fish. Suitability depends on dietary preference, allergies and total diet.",
+    "source_name": "USDA FoodData Central — food nutrient records in data/foods.csv",
+    "source_url": "https://fdc.nal.usda.gov/"
+  },
+  {
+    "id": "portion_general",
+    "title": "Portion control",
+    "topic": "portion control",
+    "text": "Use consistent serving sizes, read labels, and compare logged portions with your selected reference targets. NutriGuide calculates nutrients as nutrient per 100 g multiplied by serving grams divided by 100, then multiplied by the number of servings.",
+    "source_name": "USDA FoodData Central — portion calculation method",
+    "source_url": "https://fdc.nal.usda.gov/Foundation_Foods_Documentation/"
+  }
+]

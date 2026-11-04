@@ -1,0 +1,8 @@
+[
+  {"entry_id": 1, "meal_type": "Breakfast", "food_id": "oats", "food_name": "Rolled oats (dry)", "servings": 1.0},
+  {"entry_id": 2, "meal_type": "Breakfast", "food_id": "milk", "food_name": "Low-fat milk (1%)", "servings": 1.0},
+  {"entry_id": 3, "meal_type": "Lunch", "food_id": "lentils", "food_name": "Lentils / dal (boiled)", "servings": 1.0},
+  {"entry_id": 4, "meal_type": "Lunch", "food_id": "white_rice", "food_name": "White rice (cooked)", "servings": 1.0},
+  {"entry_id": 5, "meal_type": "Evening snack", "food_id": "banana", "food_name": "Banana (raw)", "servings": 1.0},
+  {"entry_id": 6, "meal_type": "Dinner", "food_id": "roti", "food_name": "Whole-wheat roti", "servings": 2.0}
+]

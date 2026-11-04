@@ -1,0 +1,16 @@
+{
+  "name": "NutriGuide - AI-Powered Personalized Nutrition Assistant",
+  "description": "Streamlit undergraduate proof-of-concept for AICTE Problem Statement 8: Nutrition Agent. Local demo runs without IBM credentials; IBM Granite is optional and clearly labelled.",
+  "keywords": ["streamlit", "nutrition", "RAG", "IBM Granite", "watsonx.ai", "FAISS"],
+  "env": {
+    "WATSONX_API_KEY": {"description": "Optional IBM Cloud API key. Store privately; never commit it.", "required": false},
+    "WATSONX_PROJECT_ID": {"description": "Optional watsonx.ai project ID.", "required": false},
+    "WATSONX_URL": {"description": "IBM watsonx.ai region URL", "value": "https://us-south.ml.cloud.ibm.com", "required": false},
+    "WATSONX_MODEL_ID": {"description": "Confirm model availability in your IBM account before using.", "value": "ibm/granite-3-3-8b-instruct", "required": false},
+    "WATSONX_EMBEDDING_MODEL_ID": {"description": "Optional IBM Slate embedding model.", "value": "ibm/slate-30m-english-rtrvr", "required": false},
+    "RAG_EMBEDDING_PROVIDER": {"description": "local or watsonx", "value": "local", "required": false},
+    "ALLOW_OFFLINE_FALLBACK": {"description": "Whether labelled local drafts may appear after Granite errors.", "value": "true", "required": false}
+  },
+  "formation": {"web": {"quantity": 1, "size": "free"}},
+  "scripts": {"start": "streamlit run app.py --server.address 0.0.0.0 --server.port ${PORT:-8501}"}
+}

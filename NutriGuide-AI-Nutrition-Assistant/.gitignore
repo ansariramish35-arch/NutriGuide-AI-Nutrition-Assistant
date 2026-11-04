@@ -1,0 +1,12 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.streamlit/secrets.toml
+storage/*.faiss
+storage/*.pkl
+storage/*
+!storage/.gitkeep
+.DS_Store
