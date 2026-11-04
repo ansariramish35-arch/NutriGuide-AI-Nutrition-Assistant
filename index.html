@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102a43">
+<title>NutriGuide — AI Nutrition Assistant</title>
+<meta name="description" content="NutriGuide: a browser-based nutrition education demo with food facts, meal planning and food logging.">
+<style>
+:root{--navy:#102a43;--green:#176b52;--mint:#e8f5ee;--ink:#172b24;--muted:#66766f;--line:#dce8e1;--bg:#f5f8f6;--white:#fff;--orange:#b66c20;--red:#a63b3b;--shadow:0 12px 35px rgba(16,42,67,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:248px 1fr}
+.sidebar{background:var(--navy);color:#eef7f1;padding:26px 17px;display:flex;flex-direction:column;gap:25px;min-height:100vh;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.brand-mark{width:42px;height:42px;border-radius:14px;background:#d5f0df;color:#14583f;display:grid;place-items:center;font-size:23px}.brand strong{font-size:18px;letter-spacing:-.4px}.brand small{display:block;color:#b9cec4;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.nav-label{font-size:10px;color:#91aca0;letter-spacing:1.3px;text-transform:uppercase;padding:0 10px;margin-bottom:7px}
+.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#c6d8cf;text-align:left;padding:11px 12px;border-radius:10px;display:flex;align-items:center;gap:12px;font-weight:600}.nav button:hover,.nav button.active{background:#1d4c42;color:white}.nav .ico{width:20px;text-align:center;font-size:17px}
+.sidebar-note{margin-top:auto;border:1px solid #36584f;background:#183b35;border-radius:13px;padding:13px;color:#d0e2d8;font-size:12px}.sidebar-note b{color:#fff;display:block;margin-bottom:4px}
+.main{min-width:0}.topbar{height:72px;background:rgba(255,255,255,.85);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:5;backdrop-filter:blur(10px)}
+.topbar .crumb{color:var(--muted);font-size:13px}.topbar .crumb b{color:var(--ink)}.profile-chip{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:650}.avatar{width:34px;height:34px;border-radius:50%;background:#d9efe2;color:#14583f;display:grid;place-items:center;font-weight:800}
+.content{max-width:1250px;padding:30px 34px 55px;margin:auto}.page{display:none}.page.active{display:block}.eyebrow{color:var(--green);font-size:11px;text-transform:uppercase;letter-spacing:1.35px;font-weight:800}.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px}.page-head h1{font-size:30px;line-height:1.15;letter-spacing:-1px;margin:5px 0 7px}.page-head p{margin:0;color:var(--muted);max-width:680px}.btn{border:0;border-radius:10px;background:var(--green);color:#fff;padding:10px 15px;font-weight:700;box-shadow:0 5px 14px #176b5220}.btn:hover{background:#11573f}.btn.secondary{background:#edf5ef;color:#1c5b44;box-shadow:none;border:1px solid #d4e7db}.btn.ghost{background:transparent;color:var(--green);box-shadow:none;padding:7px 9px}.btn:disabled{opacity:.45;cursor:not-allowed}
+.hero{background:linear-gradient(120deg,#102f3b,#176b52);border-radius:20px;padding:30px;color:white;display:grid;grid-template-columns:1.5fr .8fr;gap:20px;overflow:hidden;position:relative;box-shadow:var(--shadow)}.hero:after{content:"🥗";font-size:150px;position:absolute;right:6%;bottom:-35px;opacity:.13;transform:rotate(-15deg)}.hero .eyebrow{color:#a9ddc1}.hero h2{font-size:30px;line-height:1.17;letter-spacing:-.8px;margin:9px 0 12px;max-width:570px}.hero p{color:#d2e8de;max-width:560px;margin:0 0 20px}.hero .btn{background:#fff;color:#14563f;position:relative;z-index:1}
+.hero-stat{align-self:center;justify-self:end;background:#ffffff15;border:1px solid #ffffff35;border-radius:16px;padding:20px 22px;min-width:190px;z-index:1}.hero-stat strong{font-size:28px;display:block}.hero-stat span{color:#d1e6dc;font-size:12px}
+.grid{display:grid;gap:17px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:20px 0}.stat,.card{background:var(--white);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.stat{padding:17px 18px}.stat .label{font-size:12px;color:var(--muted);font-weight:650}.stat strong{display:block;font-size:25px;margin:5px 0 1px;letter-spacing:-.7px}.stat small{color:var(--muted);font-size:11px}.stat .symbol{float:right;width:35px;height:35px;border-radius:11px;background:var(--mint);display:grid;place-items:center}
+.cols{grid-template-columns:1.2fr .8fr}.card{padding:20px}.card h3{margin:0 0 4px;font-size:16px}.sub{color:var(--muted);font-size:12px;margin:0 0 16px}.quick-list{display:grid;gap:11px}.quick{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid #edf2ee;border-radius:12px}.food-emoji{width:40px;height:40px;border-radius:12px;background:#f1f7f2;display:grid;place-items:center;font-size:21px}.quick strong{display:block;font-size:13px}.quick span{font-size:11px;color:var(--muted)}
+.progress-wrap{margin:15px 0}.progress-label{display:flex;justify-content:space-between;gap:10px;font-size:12px;margin-bottom:6px}.progress-label span:last-child{color:var(--muted)}.track{height:8px;background:#edf2ee;border-radius:20px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#2b8b67,#70bd8d);border-radius:20px;width:0}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 20px}.field{display:grid;gap:5px}.field label{font-size:12px;color:#53665d;font-weight:700}.field input,.field select,.field textarea,.search{border:1px solid #d6e2da;border-radius:10px;padding:10px 12px;background:#fff;color:var(--ink);outline:none;min-width:0}.field input:focus,.field select:focus,.field textarea:focus,.search:focus{border-color:#4d9c77;box-shadow:0 0 0 3px #4d9c7718}.search{min-width:250px;flex:1}.food-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.food-card{padding:16px;border:1px solid var(--line);background:#fff;border-radius:14px}.food-card h4{margin:0 0 3px;font-size:14px}.food-card p{margin:0;color:var(--muted);font-size:11px}.food-card .cal{font-weight:800;font-size:19px;margin:13px 0 7px}.macro-row{display:flex;gap:12px;flex-wrap:wrap;color:#52655b;font-size:11px}.food-card .actions{display:flex;justify-content:space-between;align-items:center;margin-top:13px}
+.meal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.meal-card{padding:18px;background:#fff;border:1px solid var(--line);border-radius:15px}.meal-card h3{font-size:15px;margin:0 0 5px}.meal-card p{color:var(--muted);font-size:12px;margin:0 0 12px}.meal-tags{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.tag{font-size:10px;padding:4px 8px;border-radius:99px;background:#eef6f0;color:#276348;font-weight:750}
+table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid #edf1ee}th{color:#687870;font-size:10px;text-transform:uppercase;letter-spacing:.6px}td:last-child,th:last-child{text-align:right}.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed #cbd9d0;border-radius:13px}
+.chat{display:flex;flex-direction:column;gap:12px;min-height:370px}.bubble{max-width:82%;padding:13px 15px;border-radius:14px;font-size:13px;white-space:pre-wrap}.bubble.bot{background:#eff6f1;border:1px solid #dfebe2;border-top-left-radius:4px;align-self:flex-start}.bubble.user{background:#176b52;color:#fff;border-top-right-radius:4px;align-self:flex-end}.chat-input{display:flex;gap:9px;margin-top:15px}.chat-input input{flex:1;border:1px solid #d6e2da;border-radius:10px;padding:12px;min-width:0}
+.callout{background:#fff8e9;border:1px solid #f0dfb8;color:#73521d;padding:13px 15px;border-radius:12px;font-size:12px;margin:18px 0}.muted{color:var(--muted)}.two-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.form-card{max-width:720px}.form-card .field{margin-bottom:14px}.footer{border-top:1px solid var(--line);padding-top:18px;margin-top:34px;color:#829087;font-size:11px}
+.toast{position:fixed;bottom:22px;right:22px;background:#173d32;color:white;padding:12px 17px;border-radius:10px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.2s;pointer-events:none;z-index:20}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1050px){.food-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.app{grid-template-columns:1fr}.sidebar{position:static;height:auto;min-height:auto;padding:14px;gap:13px}.brand{padding:0 2px}.nav-label,.sidebar-note{display:none}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;padding:9px 11px;font-size:12px}.nav .ico{display:none}.topbar{height:56px;padding:0 16px}.content{padding:22px 16px 40px}.page-head{align-items:flex-start;flex-direction:column}.page-head h1{font-size:26px}.hero{grid-template-columns:1fr;padding:23px}.hero h2{font-size:25px}.hero-stat{justify-self:start}.cols,.meal-grid{grid-template-columns:1fr}.food-grid{grid-template-columns:1fr}.stats{gap:10px}.stat{padding:13px}.stat strong{font-size:21px}.two-fields{grid-template-columns:1fr}.profile-chip{font-size:0}.profile-chip .avatar{font-size:13px}.search{min-width:100%}.bubble{max-width:95%}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark">🥗</div><div><strong>NutriGuide</strong><small>Nutrition assistant</small></div></div>
+  <div><div class="nav-label">Workspace</div><nav class="nav">
+    <button class="active" data-page="overview"><span class="ico">⌂</span>Overview</button>
+    <button data-page="foods"><span class="ico">◉</span>Food explorer</button>
+    <button data-page="planner"><span class="ico">▦</span>Meal planner</button>
+    <button data-page="log"><span class="ico">☷</span>Food log</button>
+    <button data-page="assistant"><span class="ico">✧</span>AI assistant</button>
+    <button data-page="profile"><span class="ico">⚙</span>My profile</button>
+  </nav></div>
+  <div class="sidebar-note"><b>Demo mode</b>This GitHub Pages edition runs entirely in your browser. It does not connect to Python, IBM Granite or a remote database.</div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="crumb">NutriGuide <span class="muted">/</span> <b id="crumb">Overview</b></div><div class="profile-chip"><span id="topName">Guest</span><span class="avatar" id="avatar">G</span></div></header>
+<div class="content">
+<section class="page active" id="page-overview">
+  <div class="hero"><div><div class="eyebrow">Personal nutrition, made clearer</div><h2>Small, informed choices add up to healthier habits.</h2><p>Explore food values, build simple meals around your preferences, and keep a lightweight record of what you eat.</p><button class="btn" data-go="planner">Plan a meal&nbsp; →</button></div><div class="hero-stat"><strong id="heroCalories">0 kcal</strong><span>Logged today</span></div></div>
+  <div class="grid stats">
+    <div class="stat"><span class="symbol">🔥</span><div class="label">Calories logged</div><strong id="statCalories">0</strong><small>kcal today</small></div>
+    <div class="stat"><span class="symbol">💪</span><div class="label">Protein</div><strong id="statProtein">0 g</strong><small>logged today</small></div>
+    <div class="stat"><span class="symbol">🌾</span><div class="label">Carbohydrates</div><strong id="statCarbs">0 g</strong><small>logged today</small></div>
+    <div class="stat"><span class="symbol">🥑</span><div class="label">Fat</div><strong id="statFat">0 g</strong><small>logged today</small></div>
+  </div>
+  <div class="grid cols">
+    <div class="card"><h3>Today's progress</h3><p class="sub">Compared with your selected educational reference targets.</p><div id="progressBars"></div><button class="btn secondary" data-go="log">Open food log</button></div>
+    <div class="card"><h3>Quick actions</h3><p class="sub">Continue where you left off.</p><div class="quick-list">
+      <div class="quick"><div class="food-emoji">🍎</div><div><strong>Explore food facts</strong><span>Look up calories and nutrients</span></div><button class="btn ghost" data-go="foods">Open →</button></div>
+      <div class="quick"><div class="food-emoji">🍽️</div><div><strong>Build a meal</strong><span>Filter suggestions by diet and allergy</span></div><button class="btn ghost" data-go="planner">Open →</button></div>
+      <div class="quick"><div class="food-emoji">💬</div><div><strong>Ask NutriGuide</strong><span>Get a source-linked demo response</span></div><button class="btn ghost" data-go="assistant">Open →</button></div>
+    </div></div>
+  </div>
+  <div class="footer">Nutrition education only. Values are estimates from a small, static USDA SR Legacy subset and may differ by brand, recipe and preparation.</div>
+</section>
+
+<section class="page" id="page-foods">
+  <div class="page-head"><div><div class="eyebrow">Food database</div><h1>Food explorer</h1><p>Search the sample food list and see estimated nutrients per reference serving.</p></div></div>
+  <div class="toolbar"><input class="search" id="foodSearch" placeholder="Search foods — e.g. banana, dal, paneer"><select id="foodGroup" class="field"><option value="">All food groups</option><option>fruit</option><option>grain</option><option>legume</option><option>vegetable</option><option>protein</option><option>dairy</option><option>nuts</option></select></div>
+  <div class="grid food-grid" id="foodResults"></div>
+  <div class="footer">Food values are sourced from the USDA FoodData Central SR Legacy April 2018 records included with this project. <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noreferrer">Source details</a>.</div>
+</section>
+
+<section class="page" id="page-planner">
+  <div class="page-head"><div><div class="eyebrow">Personalized suggestions</div><h1>Meal planner</h1><p>Choose your preferences to filter the prepared meal templates. All values are calculated from the included food dataset.</p></div></div>
+  <div class="card">
+    <div class="two-fields">
+      <div class="field"><label for="dietFilter">Diet preference</label><select id="dietFilter"><option value="vegetarian">Vegetarian (no eggs)</option><option value="vegan">Vegan</option><option value="eggetarian">Eggetarian</option><option value="non_vegetarian">Non-vegetarian</option></select></div>
+      <div class="field"><label for="cuisineFilter">Cuisine</label><select id="cuisineFilter"><option value="Any">Any cuisine</option><option value="Indian">Indian</option><option value="International">International</option></select></div>
+      <div class="field"><label for="allergyFilter">Exclude allergens (comma-separated)</label><input id="allergyFilter" placeholder="e.g. milk, peanuts, gluten"></div>
+      <div class="field"><label for="mealFilter">Meal type</label><select id="mealFilter"><option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="snack">Snack</option><option value="dinner">Dinner</option></select></div>
+    </div>
+    <div style="margin-top:15px"><button class="btn" id="applyPlanner">Find suitable meals</button></div>
+  </div>
+  <div class="grid meal-grid" id="mealResults" style="margin-top:18px"></div>
+  <div class="footer">Meal templates are illustrative. Cooking oils, sauces, drinks and unlisted ingredients are not included in the totals. Always verify packaged-food labels and allergy risks.</div>
+</section>
+
+<section class="page" id="page-log">
+  <div class="page-head"><div><div class="eyebrow">Daily tracking</div><h1>Food log</h1><p>Add a food and serving amount to estimate your daily nutrient intake. Entries are saved only in this browser.</p></div><button class="btn secondary" id="clearLog">Clear today's log</button></div>
+  <div class="card" style="margin-bottom:18px"><h3>Add a food entry</h3><p class="sub">Choose an item from the sample database.</p>
+    <div class="two-fields">
+      <div class="field"><label for="logFood">Food</label><select id="logFood"></select></div>
+      <div class="field"><label for="logServings">Servings (use decimals for half portions)</label><input id="logServings" type="number" min=".1" max="20" step=".1" value="1"></div>
+      <div class="field"><label for="logMeal">Meal</label><select id="logMeal"><option>Breakfast</option><option>Lunch</option><option>Snack</option><option>Dinner</option></select></div>
+    </div><div style="margin-top:14px"><button class="btn" id="addLog">Add to food log</button></div>
+  </div>
+  <div class="card"><h3>Today's entries</h3><p class="sub" id="logDate"></p><div id="logTable"></div></div>
+</section>
+
+<section class="page" id="page-assistant">
+  <div class="page-head"><div><div class="eyebrow">Ask a nutrition question</div><h1>NutriGuide assistant</h1><p>Try questions about foods in the sample database or general healthy-eating guidance.</p></div></div>
+  <div class="card"><div class="chat" id="chat">
+    <div class="bubble bot">Hello! I can look up foods in this sample database and share a few general nutrition notes. Ask me about a food, protein, hydration, balanced meals, salt or sugar.</div>
+  </div><div class="chat-input"><input id="chatInput" placeholder="Ask something, e.g. How much protein is in lentils?"><button class="btn" id="sendChat">Send</button></div>
+  <div class="callout">This is a local rule-based demonstration, not a live AI model. It does not send your questions or profile to a server and cannot diagnose conditions or create medical diets.</div></div>
+  <div class="footer">General healthy-diet guidance: <a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank" rel="noreferrer">World Health Organization</a>.</div>
+</section>
+
+<section class="page" id="page-profile">
+  <div class="page-head"><div><div class="eyebrow">Your preferences</div><h1>My profile</h1><p>Use these settings to personalize the planner and your dashboard's educational reference targets.</p></div></div>
+  <div class="card form-card">
+    <div class="two-fields">
+      <div class="field"><label for="profileName">Name</label><input id="profileName" maxlength="40" placeholder="Guest"></div>
+      <div class="field"><label for="profileDiet">Diet preference</label><select id="profileDiet"><option value="vegetarian">Vegetarian (no eggs)</option><option value="vegan">Vegan</option><option value="eggetarian">Eggetarian</option><option value="non_vegetarian">Non-vegetarian</option></select></div>
+      <div class="field"><label for="calorieTarget">Daily calorie reference (kcal)</label><input id="calorieTarget" type="number" min="800" max="5000" step="50"></div>
+      <div class="field"><label for="proteinTarget">Daily protein reference (g)</label><input id="proteinTarget" type="number" min="20" max="250" step="5"></div>
+    </div>
+    <div class="field"><label for="profileAllergies">Allergens to exclude (comma-separated)</label><input id="profileAllergies" placeholder="e.g. milk, peanuts, gluten"></div>
+    <button class="btn" id="saveProfile">Save preferences</button>
+  </div>
+  <div class="callout">These targets are editable demonstration references, not personalized medical or dietetic recommendations. Individual needs vary.</div>
+</section>
+</div>
+</main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const $ = (id) => document.getElementById(id);
+let foods = [], meals = [], guidance = [], logEntries = [];
+let profile = {name:"Guest",diet:"vegetarian",calories:2000,protein:50,allergies:""};
+const today = new Date().toISOString().slice(0,10);
+const store = (key,val) => { try{localStorage.setItem("nutriguide_"+key,JSON.stringify(val));}catch(e){} };
+const restore = (key,fallback) => { try{const v=localStorage.getItem("nutriguide_"+key);return v?JSON.parse(v):fallback;}catch(e){return fallback;} };
+function csvRows(text){
+  const rows=[];let row=[],cell="",quoted=false;
+  for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){cell+='"';i++;}else quoted=!quoted;}
+    else if(c===','&&!quoted){row.push(cell);cell="";}
+    else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cell);if(row.some(x=>x!==""))rows.push(row);row=[];cell="";}
+    else cell+=c;}
+  row.push(cell);if(row.some(x=>x!==""))rows.push(row);
+  const headers=rows.shift();return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,r[i]??""])));
+}
+async function init(){
+  try{
+    const [f,m,g]=await Promise.all([fetch("data/foods.csv"),fetch("data/meal_templates.json"),fetch("data/guidance.json")]);
+    if(!f.ok||!m.ok||!g.ok)throw new Error("Project data files could not be loaded.");
+    foods=csvRows(await f.text()).map(x=>({...x,serving_grams:+x.serving_grams,calories_100g:+x.calories_100g,protein_100g:+x.protein_100g,carbs_100g:+x.carbs_100g,fat_100g:+x.fat_100g,fiber_100g:+x.fiber_100g,calcium_mg_100g:+x.calcium_mg_100g,iron_mg_100g:+x.iron_mg_100g,vitamin_c_mg_100g:+x.vitamin_c_mg_100g,allergens:x.allergens?x.allergens.toLowerCase().split("|"):[],aliases:x.aliases.toLowerCase().split("|"),meal_tags:x.meal_tags.split("|"),cuisines:x.cuisines.split("|")}));
+    meals=await m.json();guidance=await g.json();
+    if(!foods.length)throw new Error("Food dataset is empty.");
+    $("logDate").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+    loadProfile();loadLog();renderAll();renderPlanner();renderFoods();populateLogFoods();
+  }catch(err){document.querySelector(".content").innerHTML='<div class="callout">The app could not load its local project data. Make sure GitHub Pages publishes the repository root so the <code>data/</code> folder is available. Details: '+err.message+'</div>';console.error(err);}
+}
+function foodById(id){return foods.find(f=>f.food_id===id);}
+function nutrient(food,key,servings=1){return food[key+"_100g"]*food.serving_grams/100*servings;}
+function fmt(n,d=1){return (Number(n)||0).toFixed(d).replace(/\.0$/,"");}
+function totalsFor(components){return components.reduce((t,c)=>{const f=foodById(c.food_id);if(!f)return t;for(const k of ["calories","protein","carbs","fat","fiber"])t[k]+=nutrient(f,k,c.servings);return t;},{calories:0,protein:0,carbs:0,fat:0,fiber:0});}
+function toast(message){const el=$("toast");el.textContent=message;el.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),2300);}
+function go(page){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+page));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));$("crumb").textContent=({overview:"Overview",foods:"Food explorer",planner:"Meal planner",log:"Food log",assistant:"AI assistant",profile:"My profile"})[page];if(page==="log")renderLog();if(page==="planner")renderPlanner();if(page==="foods")renderFoods();window.scrollTo({top:0,behavior:"smooth"});}
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+function loadProfile(){profile=restore("profile",profile);$("profileName").value=profile.name;$("profileDiet").value=profile.diet;$("calorieTarget").value=profile.calories;$("proteinTarget").value=profile.protein;$("profileAllergies").value=profile.allergies||"";$("dietFilter").value=profile.diet;$("allergyFilter").value=profile.allergies||"";updateHeader();}
+function updateHeader(){$("topName").textContent=profile.name||"Guest";$("avatar").textContent=(profile.name||"G").trim().charAt(0).toUpperCase();}
+$("saveProfile").addEventListener("click",()=>{profile={name:$("profileName").value.trim()||"Guest",diet:$("profileDiet").value,calories:Math.max(800,Math.min(5000,+$("calorieTarget").value||2000)),protein:Math.max(20,Math.min(250,+$("proteinTarget").value||50)),allergies:$("profileAllergies").value};store("profile",profile);$("dietFilter").value=profile.diet;$("allergyFilter").value=profile.allergies;updateHeader();renderAll();renderPlanner();toast("Preferences saved in this browser.");});
+function loadLog(){logEntries=restore("log",[]).filter(x=>x.date===today);}
+function saveLog(){store("log",logEntries);}
+function todayTotals(){return logEntries.reduce((t,e)=>{const f=foodById(e.food_id);if(!f)return t;for(const k of ["calories","protein","carbs","fat","fiber"])t[k]+=nutrient(f,k,e.servings);return t;},{calories:0,protein:0,carbs:0,fat:0,fiber:0});}
+function renderAll(){const t=todayTotals();$("heroCalories").textContent=fmt(t.calories)+" kcal";$("statCalories").textContent=fmt(t.calories);$("statProtein").textContent=fmt(t.protein)+" g";$("statCarbs").textContent=fmt(t.carbs)+" g";$("statFat").textContent=fmt(t.fat)+" g";
+const rows=[["Calories",t.calories,profile.calories,"kcal"],["Protein",t.protein,profile.protein,"g"],["Carbohydrates",t.carbs,250,"g"],["Fat",t.fat,70,"g"]];
+$("progressBars").innerHTML=rows.map(([n,v,target,u])=>'<div class="progress-wrap"><div class="progress-label"><b>'+n+'</b><span>'+fmt(v)+' / '+fmt(target)+' '+u+'</span></div><div class="track"><div class="fill" style="width:'+Math.min(100,v/target*100)+'%"></div></div></div>').join("");}
+function renderFoods(){
+ const q=($("foodSearch").value||"").trim().toLowerCase(),group=$("foodGroup").value;
+ const filtered=foods.filter(f=>(!group||f.food_group===group)&&(!q||f.food_name.toLowerCase().includes(q)||f.aliases.some(a=>a.includes(q))));
+ $("foodResults").innerHTML=filtered.length?filtered.map(f=>'<article class="food-card"><h4>'+f.food_name+'</h4><p>'+f.serving_label+' · '+f.food_group+'</p><div class="cal">'+fmt(nutrient(f,"calories"))+' kcal</div><div class="macro-row"><span>Protein '+fmt(nutrient(f,"protein"))+' g</span><span>Carbs '+fmt(nutrient(f,"carbs"))+' g</span><span>Fat '+fmt(nutrient(f,"fat"))+' g</span></div><div class="actions"><a href="'+f.source_url+'" target="_blank" rel="noreferrer" class="muted" style="font-size:11px">USDA source ↗</a><button class="btn secondary" onclick="quickAdd(\''+f.food_id+'\')">Add to log</button></div></article>').join(""):'<div class="empty">No matching foods found.</div>';
+}
+$("foodSearch").addEventListener("input",renderFoods);$("foodGroup").addEventListener("change",renderFoods);
+function populateLogFoods(){$("logFood").innerHTML=foods.map(f=>'<option value="'+f.food_id+'">'+f.food_name+' ('+f.serving_label+')</option>').join("");}
+function quickAdd(id){$("logFood").value=id;$("logServings").value="1";go("log");}
+$("addLog").addEventListener("click",()=>{const id=$("logFood").value,servings=+$("logServings").value;if(!id||!Number.isFinite(servings)||servings<=0||servings>20){toast("Enter a valid serving amount.");return;}logEntries.push({id:Date.now(),food_id:id,servings,meal:$("logMeal").value,date:today});saveLog();renderAll();renderLog();toast("Food added to today's log.");});
+function renderLog(){if(!logEntries.length){$("logTable").innerHTML='<div class="empty">No food entries yet. Add your first item above or add a food from Food explorer.</div>';return;}
+const total=todayTotals();$("logTable").innerHTML='<div style="overflow-x:auto"><table><thead><tr><th>Food</th><th>Meal</th><th>Servings</th><th>Calories</th><th></th></tr></thead><tbody>'+logEntries.map(e=>{const f=foodById(e.food_id);return '<tr><td><b>'+f.food_name+'</b><br><span class="muted">'+f.serving_label+'</span></td><td>'+e.meal+'</td><td>'+fmt(e.servings,2)+'</td><td>'+fmt(nutrient(f,"calories",e.servings))+' kcal</td><td><button class="btn ghost" onclick="removeLog('+e.id+')">Remove</button></td></tr>';}).join("")+'</tbody></table></div><div class="macro-row" style="padding-top:14px;font-weight:750"><span>Total: '+fmt(total.calories)+' kcal</span><span>Protein '+fmt(total.protein)+' g</span><span>Carbs '+fmt(total.carbs)+' g</span><span>Fat '+fmt(total.fat)+' g</span></div>';}
+function removeLog(id){logEntries=logEntries.filter(e=>e.id!==id);saveLog();renderLog();renderAll();toast("Entry removed.");}
+$("clearLog").addEventListener("click",()=>{if(!confirm("Clear all food entries for today?"))return;logEntries=[];saveLog();renderLog();renderAll();toast("Today's log cleared.");});
+function dietAllowed(food,diet){if(diet==="vegan")return food.diet_type==="vegan";if(diet==="vegetarian")return ["vegan","vegetarian"].includes(food.diet_type);if(diet==="eggetarian")return ["vegan","vegetarian","eggetarian"].includes(food.diet_type);return true;}
+function renderPlanner(){
+ if(!foods.length||!meals.length)return;
+ const diet=$("dietFilter").value,cuisine=$("cuisineFilter").value,type=$("mealFilter").value,allergies=$("allergyFilter").value.toLowerCase().split(",").map(x=>x.trim()).filter(Boolean);
+ const matches=meals.filter(m=>m.meal_types.includes(type)&&(cuisine==="Any"||m.cuisines.includes(cuisine))&&m.components.every(c=>{const f=foodById(c.food_id);return f&&dietAllowed(f,diet)&&!f.allergens.some(a=>allergies.includes(a));}));
+ $("mealResults").innerHTML=matches.length?matches.map(m=>{const t=totalsFor(m.components),items=m.components.map(c=>{const f=foodById(c.food_id);return fmt(c.servings,2)+" × "+f.food_name;}).join(" · ");return '<article class="meal-card"><div class="eyebrow">'+m.meal_types.join(" / ")+'</div><h3>'+m.title+'</h3><p>'+m.reason+'</p><div class="meal-tags">'+m.cuisines.map(c=>'<span class="tag">'+c+'</span>').join("")+'</div><p><b>Includes:</b> '+items+'</p><div class="macro-row"><span>'+fmt(t.calories)+' kcal</span><span>'+fmt(t.protein)+' g protein</span><span>'+fmt(t.carbs)+' g carbs</span><span>'+fmt(t.fat)+' g fat</span></div><div style="margin-top:15px"><button class="btn secondary" onclick="addMeal(\''+m.id+'\')">Add meal to food log</button></div></article>';}).join(""):'<div class="empty">No template matches all selected filters. Try another cuisine or remove an allergen filter.</div>';
+}
+$("applyPlanner").addEventListener("click",renderPlanner);
+["dietFilter","cuisineFilter","allergyFilter","mealFilter"].forEach(id=>$(id).addEventListener("change",renderPlanner));
+function addMeal(id){const m=meals.find(x=>x.id===id);if(!m)return;m.components.forEach(c=>logEntries.push({id:Date.now()+Math.random(),food_id:c.food_id,servings:c.servings,meal:m.meal_types[0].replace(/^./,x=>x.toUpperCase()),date:today}));saveLog();renderAll();toast("Meal components added to today's log.");}
+function addBubble(text,kind){const el=document.createElement("div");el.className="bubble "+kind;el.textContent=text;$("chat").appendChild(el);$("chat").scrollTop=$("chat").scrollHeight;}
+function answerQuestion(raw){
+ const q=raw.toLowerCase(),food=foods.find(f=>f.food_name.toLowerCase().includes(q)||f.aliases.some(a=>q.includes(a))||q.includes(f.food_id));
+ if(food){return food.food_name+" ("+food.serving_label+") contains approximately "+fmt(nutrient(food,"calories"))+" kcal, "+fmt(nutrient(food,"protein"))+" g protein, "+fmt(nutrient(food,"carbs"))+" g carbohydrates and "+fmt(nutrient(food,"fat"))+" g fat per listed serving. Values come from the USDA SR Legacy sample record. "+food.source_url;}
+ const g=guidance.find(x=>x.topic.split(" ").some(w=>w.length>3&&q.includes(w))||x.title.toLowerCase().split(" ").some(w=>w.length>3&&q.includes(w)));
+ if(g)return g.text+" Source: "+g.source_url;
+ if(q.includes("protein"))return "Protein-containing foods in this sample include lentils, chickpeas, kidney beans, tofu, dairy, eggs, chicken and fish. The amount depends on the food and serving size. Use Food explorer to compare sample values.";
+ if(q.includes("calorie")||q.includes("calories"))return "Calories vary by food and portion. Search the Food explorer for a listed serving, or use Food log to estimate a meal. These estimates do not include unlisted oils, sauces or ingredients.";
+ if(q.includes("allerg")||q.includes("gluten"))return "Use the Meal planner's allergen filter to exclude allergens recorded in the sample food dataset. This is not a guarantee against cross-contact or hidden ingredients. Always verify labels and seek professional advice for serious allergies.";
+ return "I can help with foods in the sample dataset and general guidance on balanced meals, hydration, protein, portions, salt and sugar. Try asking about a listed food such as banana, lentils, oats or chicken. This is a rule-based demo, not a live AI model.";
+}
+function sendChat(){const input=$("chatInput"),q=input.value.trim();if(!q)return;addBubble(q,"user");input.value="";setTimeout(()=>addBubble(answerQuestion(q),"bot"),120);}
+$("sendChat").addEventListener("click",sendChat);$("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
+init();
+</script>
+</body>
+</html>
