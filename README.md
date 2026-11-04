@@ -1,3 +1,16 @@
+## GitHub Pages deployment (browser edition)
+
+The repository root contains `index.html`, a static browser edition of NutriGuide. GitHub Pages can host this edition because it runs HTML, CSS and JavaScript in the visitor's browser. Its food explorer, template-based meal planner, nutrient calculations, browser-local food log and rule-based demonstration assistant work without a Python server.
+
+**Important limitation:** GitHub Pages does not run `app.py`, Streamlit, Python packages, FAISS, or the IBM watsonx.ai SDK. The Pages edition is therefore a client-side demonstration and does not make live IBM Granite calls. Food-log entries and preferences are stored in the visitor's browser only. For the full Streamlit/Python experience, run `streamlit run app.py` on a Python host.
+
+Published site (after the Pages deployment completes):  
+https://ansariramish35-arch.github.io/NutriGuide-AI-Nutrition-Assistant/
+
+Pages should publish the `main` branch from the repository root (`/(root)`). The `.nojekyll` marker keeps static project data and assets available to the browser app.
+
+---
+
 # NutriGuide – AI-Powered Personalized Nutrition Assistant
 
 **IBM SkillsBuild University Engagement – AICTE 2026 · Problem Statement No. 8: Nutrition Agent**  
